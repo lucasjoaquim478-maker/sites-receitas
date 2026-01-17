@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Site de Receitas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0; padding: 0;
+      background: #fff8f0; color: #333;
+    }
+    header {
+      background: #8b4513; color: #fff;
+      padding: 20px; text-align: center;
+    }
+    nav {
+      background: #d2691e; padding: 10px;
+    }
+    nav a {
+      color: #fff; margin: 0 10px;
+      text-decoration: none; font-weight: bold;
+    }
+    section {
+      padding: 20px;
+    }
+    article {
+      background: #fff; border: 1px solid #ccc;
+      margin: 10px 0; padding: 15px;
+      border-radius: 5px;
+    }
+    h2 { color: #8b4513; }
+    h3 { margin-top: 0; }
+    .categoria { margin-bottom: 40px; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🍰 Site de Receitas</h1>
+    <p>Mais de 100 receitas deliciosas: bolos, chocolate quente, pudins e muito mais!</p>
+  </header>
+  <nav>
+    <a href="#bolos">Bolos</a>
+    <a href="#chocolate">Chocolate Quente</a>
+    <a href="#pudins">Pudins</a>
+    <a href="#doces">Doces Diversos</a>
+  </nav>
+
+  <section id="bolos" class="categoria">
+    <h2>Bolos</h2>
+    <!-- Exemplo de receita -->
+    <article>
+      <h3>Bolo de Chocolate</h3>
+      <h4>Ingredientes:</h4>
+      <ul>
+        <li>2 xícaras de farinha</li>
+        <li>1 xícara de açúcar</li>
+        <li>1 xícara de chocolate em pó</li>
+        <li>3 ovos</li>
+        <li>1 colher de fermento</li>
+      </ul>
+      <h4>Modo de Preparo:</h4>
+      <p>Misture tudo, coloque em forma untada e asse por 40 minutos a 180°C.</p>
+    </article>
+    <!-- Repita artigos para completar +30 receitas de bolos -->
+  </section>
+
+  <section id="chocolate" class="categoria">
+    <h2>Chocolate Quente</h2>
+    <article>
+      <h3>Chocolate Quente Cremoso</h3>
+      <h4>Ingredientes:</h4>
+      <ul>
+        <li>500ml de leite</li>
+        <li>4 colheres de chocolate em pó</li>
+        <li>2 colheres de açúcar</li>
+        <li>1 colher de amido de milho</li>
+      </ul>
+      <h4>Modo de Preparo:</h4>
+      <p>Aqueça o leite, adicione os demais ingredientes e mexa até engrossar.</p>
+    </article>
+    <!-- Adicione +20 receitas de chocolate quente -->
+  </section>
+
+  <section id="pudins" class="categoria">
+    <h2>Pudins</h2>
+    <article>
+      <h3>Pudim de Leite Condensado</h3>
+      <h4>Ingredientes:</h4>
+      <ul>
+        <li>1 lata de leite condensado</li>
+        <li>2 medidas de leite</li>
+        <li>3 ovos</li>
+        <li>Calda de açúcar caramelizado</li>
+      </ul>
+      <h4>Modo de Preparo:</h4>
+      <p>Bata tudo no liquidificador, despeje na forma caramelizada e asse em banho-maria.</p>
+    </article>
+    <!-- Adicione +20 receitas de pudins -->
+  </section>
+
+  <section id="doces" class="categoria">
+    <h2>Doces Diversos</h2>
+    <article>
+      <h3>Brigadeiro</h3>
+      <h4>Ingredientes:</h4>
+      <ul>
+        <li>1 lata de leite condensado</li>
+        <li>2 colheres de chocolate em pó</li>
+        <li>1 colher de manteiga</li>
+      </ul>
+      <h4>Modo de Preparo:</h4>
+      <p>Cozinhe em fogo baixo até desgrudar da panela. Enrole e passe no granulado.</p>
+    </article>
+    <!-- Adicione +30 receitas de doces variados -->
+  </section>
+
+  <script>
+    // Exemplo: filtro simples por título
+    function buscarReceita() {
+      let termo = prompt("Digite o nome da receita:");
+      if (!termo) return;
+      let artigos = document.querySelectorAll("article");
+      artigos.forEach(a => {
+        if (a.querySelector("h3").innerText.toLowerCase().includes(termo.toLowerCase())) {
+          a.style.background = "#ffffcc";
+        } else {
+          a.style.background = "#fff";
+        }
+      });
+    }
+  </script>
+  <footer style="background:#d2691e;color:#fff;text-align:center;padding:10px;">
+    <button onclick="buscarReceita()">🔍 Buscar Receita</button>
+    <p>&copy; 2026 - Site de Receitas</p>
+  </footer>
+</body>
+</html>
