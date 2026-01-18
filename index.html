@@ -3,79 +3,95 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Site de Receitas</title>
+  <title>Receitas Premium</title>
   <style>
-    body { font-family: Arial, sans-serif; margin:0; background:#f5f5f5; }
-    header { background:#8e44ad; color:#fff; padding:20px; text-align:center; }
-    nav { background:#732d91; padding:10px; text-align:center; }
-    nav button { margin:5px; padding:10px 15px; border:none; cursor:pointer; border-radius:5px; color:#333; }
-    main { max-width:1200px; margin:20px auto; padding:10px; }
-    .recipe { background:#fff; margin-bottom:20px; padding:15px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1); display:flex; gap:15px; }
-    .recipe img { width:200px; height:150px; object-fit:cover; border-radius:8px; }
-    h2 { color:#8e44ad; }
+    body { font-family: 'Segoe UI', Arial, sans-serif; margin:0; background:#fafafa; }
+    header { background:linear-gradient(135deg,#ff6a00,#ee0979); color:#fff; padding:30px; text-align:center; }
+    nav { display:flex; justify-content:center; gap:15px; background:#fff; padding:15px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+    nav button { padding:12px 20px; border:none; border-radius:25px; cursor:pointer; font-weight:bold; background:#ff6a00; color:#fff; }
+    nav button:hover { opacity:0.85; }
+    main { max-width:1200px; margin:30px auto; padding:15px; display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; }
+    .recipe { background:#fff; border-radius:15px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.1); transition:transform 0.2s; }
+    .recipe:hover { transform:translateY(-5px); }
+    .recipe img { width:100%; height:200px; object-fit:cover; }
+    .content { padding:15px; }
+    h2 { grid-column:1/-1; color:#333; }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🍽️ Site de Receitas</h1>
-    <p>Pudins • Bolos • Pizzas</p>
-  </header>
 
-  <nav>
-    <button onclick="mostrar('pudim')">🍮 Pudins</button>
-    <button onclick="mostrar('bolo')">🍰 Bolos</button>
-    <button onclick="mostrar('pizza')">🍕 Pizzas</button>
-  </nav>
+<header>
+  <h1>🍰 Receitas Premium</h1>
+  <p>10 Pudins • 10 Bolos • 10 Pizzas — todas diferentes</p>
+</header>
 
-  <main id="conteudo"></main>
+<nav>
+  <button onclick="mostrar('pudim')">🍮 Pudins</button>
+  <button onclick="mostrar('bolo')">🍰 Bolos</button>
+  <button onclick="mostrar('pizza')">🍕 Pizzas</button>
+</nav>
 
-  <script>
-    function gerarReceitas(tipo, total, imagem) {
-      const receitas = [];
-      for (let i = 1; i <= total; i++) {
-        receitas.push({
-          nome: `${tipo} ${i}`,
-          imagem: imagem,
-          ingredientes: [
-            '2 ovos',
-            '1 lata de leite condensado',
-            '1 medida de leite',
-            tipo === 'Pizza' ? 'Massa de pizza pronta' : '1 colher de açúcar'
-          ],
-          recheio: tipo === 'Pizza'
-            ? 'Molho de tomate, queijo mussarela, tomate e orégano'
-            : 'Calda de açúcar caramelizado',
-          preparo: 'Misture todos os ingredientes, prepare o recheio separadamente e asse até ficar pronto.'
-        });
-      }
-      return receitas;
-    }
+<main id="conteudo"></main>
 
-    const dados = {
-      pudim: gerarReceitas('Pudim', 100, 'https://images.unsplash.com/photo-1604908177522-3c1a7c5f3a3b'),
-      bolo: gerarReceitas('Bolo', 100, 'https://images.unsplash.com/photo-1542826438-8b7b9f8c6a5a'),
-      pizza: gerarReceitas('Pizza', 100, 'https://images.unsplash.com/photo-1601924638867-3ec62f6d9c1d')
-    };
+<script>
+const dados = {
+  pudim: [
+    {n:'Pudim Tradicional', i:['Leite condensado','Leite','Ovos'], r:'Calda de açúcar', p:'Bata tudo, caramelize a forma e asse em banho-maria.'},
+    {n:'Pudim de Chocolate', i:['Leite condensado','Chocolate','Ovos'], r:'Calda de chocolate', p:'Misture, leve ao forno e geladeira.'},
+    {n:'Pudim de Coco', i:['Leite condensado','Leite de coco','Ovos'], r:'Calda de coco', p:'Asse em banho-maria.'},
+    {n:'Pudim de Laranja', i:['Suco de laranja','Leite','Ovos'], r:'Calda cítrica', p:'Bata e asse.'},
+    {n:'Pudim de Limão', i:['Leite condensado','Limão','Ovos'], r:'Calda de limão', p:'Gelado após assar.'},
+    {n:'Pudim de Café', i:['Leite','Café','Ovos'], r:'Calda de caramelo', p:'Asse lentamente.'},
+    {n:'Pudim Fit', i:['Leite desnatado','Adoçante','Ovos'], r:'Calda diet', p:'Forno baixo.'},
+    {n:'Pudim de Baunilha', i:['Leite','Baunilha','Ovos'], r:'Calda clara', p:'Banho-maria.'},
+    {n:'Pudim de Maracujá', i:['Suco de maracujá','Leite','Ovos'], r:'Calda da fruta', p:'Geladeira antes de servir.'},
+    {n:'Pudim Cremoso', i:['Creme de leite','Leite','Ovos'], r:'Calda simples', p:'Forno médio.'}
+  ],
+  bolo: [
+    {n:'Bolo de Chocolate', i:['Farinha','Chocolate','Ovos'], r:'Cobertura de chocolate', p:'Asse por 40 min.'},
+    {n:'Bolo de Cenoura', i:['Cenoura','Farinha','Ovos'], r:'Chocolate', p:'Forno médio.'},
+    {n:'Bolo de Laranja', i:['Suco de laranja','Farinha'], r:'Calda de laranja', p:'Asse até dourar.'},
+    {n:'Bolo de Limão', i:['Limão','Farinha'], r:'Cobertura cítrica', p:'Forno médio.'},
+    {n:'Bolo de Coco', i:['Coco','Leite'], r:'Cobertura de coco', p:'Asse bem.'},
+    {n:'Bolo de Fubá', i:['Fubá','Leite'], r:'Sem recheio', p:'Forno baixo.'},
+    {n:'Bolo Formigueiro', i:['Chocolate granulado'], r:'Chocolate', p:'Misture e asse.'},
+    {n:'Bolo de Banana', i:['Banana','Canela'], r:'Canela', p:'Forno médio.'},
+    {n:'Bolo de Milho', i:['Milho','Leite'], r:'Coco', p:'Asse até firme.'},
+    {n:'Bolo Integral', i:['Farinha integral','Ovos'], r:'Mel', p:'Forno baixo.'}
+  ],
+  pizza: [
+    {n:'Pizza Mussarela', i:['Massa','Queijo'], r:'Molho e queijo', p:'Asse até dourar.'},
+    {n:'Pizza Calabresa', i:['Calabresa','Cebola'], r:'Molho e calabresa', p:'Forno alto.'},
+    {n:'Pizza Frango', i:['Frango','Catupiry'], r:'Frango cremoso', p:'Asse bem.'},
+    {n:'Pizza Portuguesa', i:['Presunto','Ovo'], r:'Completa', p:'Forno médio.'},
+    {n:'Pizza Marguerita', i:['Tomate','Manjericão'], r:'Tradicional', p:'Forno rápido.'},
+    {n:'Pizza Quatro Queijos', i:['Queijos variados'], r:'Queijos', p:'Asse até derreter.'},
+    {n:'Pizza Pepperoni', i:['Pepperoni'], r:'Molho e pepperoni', p:'Forno alto.'},
+    {n:'Pizza Atum', i:['Atum','Cebola'], r:'Atum temperado', p:'Asse bem.'},
+    {n:'Pizza Bacon', i:['Bacon'], r:'Bacon crocante', p:'Forno médio.'},
+    {n:'Pizza Vegetariana', i:['Legumes'], r:'Legumes', p:'Asse até dourar.'}
+  ]
+};
 
-    function mostrar(categoria) {
-      const div = document.getElementById('conteudo');
-      div.innerHTML = `<h2>${categoria.toUpperCase()}</h2>`;
-      dados[categoria].forEach(r => {
-        div.innerHTML += `
-          <div class="recipe">
-            <img src="${r.imagem}" alt="${r.nome}">
-            <div>
-              <h3>${r.nome}</h3>
-              <p><strong>Ingredientes:</strong></p>
-              <ul>${r.ingredientes.map(i => `<li>${i}</li>`).join('')}</ul>
-              <p><strong>Recheio/Calda:</strong> ${r.recheio}</p>
-              <p><strong>Modo de Preparo:</strong> ${r.preparo}</p>
-            </div>
-          </div>`;
-      });
-    }
+function mostrar(cat){
+  const c = document.getElementById('conteudo');
+  c.innerHTML = `<h2>${cat.toUpperCase()}</h2>`;
+  dados[cat].forEach((r,i)=>{
+    c.innerHTML += `
+      <div class="recipe">
+        <img src="https://picsum.photos/seed/${cat}-${i}/500/300">
+        <div class="content">
+          <h3>${r.n}</h3>
+          <p><strong>Ingredientes:</strong> ${r.i.join(', ')}</p>
+          <p><strong>Recheio:</strong> ${r.r}</p>
+          <p><strong>Preparo:</strong> ${r.p}</p>
+        </div>
+      </div>`;
+  });
+}
 
-    mostrar('pudim');
-  </script>
+mostrar('pudim');
+</script>
+
 </body>
 </html>
