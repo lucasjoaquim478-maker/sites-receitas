@@ -22,7 +22,7 @@
 
 <header>
   <h1>🍰 Receitas Premium</h1>
-  <p>10 Pudins • 10 Bolos • 10 Pizzas — todas diferentes</p>
+  <p>10 Pudins • 10 Bolos • 10 Pizzas — preparo correto e tempo de forno</p>
 </header>
 
 <nav>
@@ -36,40 +36,40 @@
 <script>
 const dados = {
   pudim: [
-    {n:'Pudim Tradicional', i:['Leite condensado','Leite','Ovos'], r:'Calda de açúcar', p:'Bata tudo, caramelize a forma e asse em banho-maria.'},
-    {n:'Pudim de Chocolate', i:['Leite condensado','Chocolate','Ovos'], r:'Calda de chocolate', p:'Misture, leve ao forno e geladeira.'},
-    {n:'Pudim de Coco', i:['Leite condensado','Leite de coco','Ovos'], r:'Calda de coco', p:'Asse em banho-maria.'},
-    {n:'Pudim de Laranja', i:['Suco de laranja','Leite','Ovos'], r:'Calda cítrica', p:'Bata e asse.'},
-    {n:'Pudim de Limão', i:['Leite condensado','Limão','Ovos'], r:'Calda de limão', p:'Gelado após assar.'},
-    {n:'Pudim de Café', i:['Leite','Café','Ovos'], r:'Calda de caramelo', p:'Asse lentamente.'},
-    {n:'Pudim Fit', i:['Leite desnatado','Adoçante','Ovos'], r:'Calda diet', p:'Forno baixo.'},
-    {n:'Pudim de Baunilha', i:['Leite','Baunilha','Ovos'], r:'Calda clara', p:'Banho-maria.'},
-    {n:'Pudim de Maracujá', i:['Suco de maracujá','Leite','Ovos'], r:'Calda da fruta', p:'Geladeira antes de servir.'},
-    {n:'Pudim Cremoso', i:['Creme de leite','Leite','Ovos'], r:'Calda simples', p:'Forno médio.'}
+    {n:'Pudim Tradicional', i:['Leite condensado','Leite','Ovos'], r:'Calda de açúcar', p:'Bata os ingredientes no liquidificador. Caramelize a forma, despeje a mistura e asse em banho-maria a 180°C.', t:'1 hora + 4h de geladeira'},
+    {n:'Pudim de Chocolate', i:['Leite condensado','Chocolate em pó','Ovos'], r:'Calda de chocolate', p:'Bata tudo, coloque na forma untada e asse em banho-maria.', t:'1 hora'},
+    {n:'Pudim de Coco', i:['Leite condensado','Leite de coco','Ovos'], r:'Calda de coco', p:'Misture bem, asse em banho-maria e leve para gelar.', t:'1 hora'},
+    {n:'Pudim de Laranja', i:['Suco de laranja','Leite','Ovos'], r:'Calda cítrica', p:'Bata os ingredientes, coloque na forma caramelizada e asse.', t:'50 minutos'},
+    {n:'Pudim de Limão', i:['Leite condensado','Limão','Ovos'], r:'Calda de limão', p:'Misture, asse em banho-maria e refrigere.', t:'1 hora'},
+    {n:'Pudim de Café', i:['Leite','Café','Ovos'], r:'Calda de caramelo', p:'Bata, asse lentamente em banho-maria.', t:'1 hora'},
+    {n:'Pudim Fit', i:['Leite desnatado','Adoçante','Ovos'], r:'Calda diet', p:'Misture, asse em temperatura baixa.', t:'50 minutos'},
+    {n:'Pudim de Baunilha', i:['Leite','Baunilha','Ovos'], r:'Calda clara', p:'Bata bem e asse em banho-maria.', t:'1 hora'},
+    {n:'Pudim de Maracujá', i:['Suco de maracujá','Leite','Ovos'], r:'Calda da fruta', p:'Misture tudo e asse.', t:'1 hora'},
+    {n:'Pudim Cremoso', i:['Creme de leite','Leite','Ovos'], r:'Calda simples', p:'Bata levemente e asse.', t:'45 minutos'}
   ],
   bolo: [
-    {n:'Bolo de Chocolate', i:['Farinha','Chocolate','Ovos'], r:'Cobertura de chocolate', p:'Asse por 40 min.'},
-    {n:'Bolo de Cenoura', i:['Cenoura','Farinha','Ovos'], r:'Chocolate', p:'Forno médio.'},
-    {n:'Bolo de Laranja', i:['Suco de laranja','Farinha'], r:'Calda de laranja', p:'Asse até dourar.'},
-    {n:'Bolo de Limão', i:['Limão','Farinha'], r:'Cobertura cítrica', p:'Forno médio.'},
-    {n:'Bolo de Coco', i:['Coco','Leite'], r:'Cobertura de coco', p:'Asse bem.'},
-    {n:'Bolo de Fubá', i:['Fubá','Leite'], r:'Sem recheio', p:'Forno baixo.'},
-    {n:'Bolo Formigueiro', i:['Chocolate granulado'], r:'Chocolate', p:'Misture e asse.'},
-    {n:'Bolo de Banana', i:['Banana','Canela'], r:'Canela', p:'Forno médio.'},
-    {n:'Bolo de Milho', i:['Milho','Leite'], r:'Coco', p:'Asse até firme.'},
-    {n:'Bolo Integral', i:['Farinha integral','Ovos'], r:'Mel', p:'Forno baixo.'}
+    {n:'Bolo de Chocolate', i:['Farinha','Chocolate','Ovos'], r:'Cobertura de chocolate', p:'Misture, coloque na forma e asse a 180°C.', t:'40 minutos'},
+    {n:'Bolo de Cenoura', i:['Cenoura','Farinha','Ovos'], r:'Chocolate', p:'Bata a cenoura, misture com os secos e asse.', t:'45 minutos'},
+    {n:'Bolo de Laranja', i:['Suco de laranja','Farinha'], r:'Calda de laranja', p:'Misture bem e leve ao forno.', t:'40 minutos'},
+    {n:'Bolo de Limão', i:['Limão','Farinha'], r:'Cobertura cítrica', p:'Misture os ingredientes e asse.', t:'40 minutos'},
+    {n:'Bolo de Coco', i:['Coco','Leite'], r:'Cobertura de coco', p:'Misture e asse até dourar.', t:'45 minutos'},
+    {n:'Bolo de Fubá', i:['Fubá','Leite'], r:'Sem recheio', p:'Misture tudo e asse.', t:'40 minutos'},
+    {n:'Bolo Formigueiro', i:['Chocolate granulado'], r:'Chocolate', p:'Misture delicadamente e asse.', t:'35 minutos'},
+    {n:'Bolo de Banana', i:['Banana','Canela'], r:'Canela', p:'Misture e asse até dourar.', t:'40 minutos'},
+    {n:'Bolo de Milho', i:['Milho','Leite'], r:'Coco', p:'Bata no liquidificador e asse.', t:'45 minutos'},
+    {n:'Bolo Integral', i:['Farinha integral','Ovos'], r:'Mel', p:'Misture e asse em forno médio.', t:'45 minutos'}
   ],
   pizza: [
-    {n:'Pizza Mussarela', i:['Massa','Queijo'], r:'Molho e queijo', p:'Asse até dourar.'},
-    {n:'Pizza Calabresa', i:['Calabresa','Cebola'], r:'Molho e calabresa', p:'Forno alto.'},
-    {n:'Pizza Frango', i:['Frango','Catupiry'], r:'Frango cremoso', p:'Asse bem.'},
-    {n:'Pizza Portuguesa', i:['Presunto','Ovo'], r:'Completa', p:'Forno médio.'},
-    {n:'Pizza Marguerita', i:['Tomate','Manjericão'], r:'Tradicional', p:'Forno rápido.'},
-    {n:'Pizza Quatro Queijos', i:['Queijos variados'], r:'Queijos', p:'Asse até derreter.'},
-    {n:'Pizza Pepperoni', i:['Pepperoni'], r:'Molho e pepperoni', p:'Forno alto.'},
-    {n:'Pizza Atum', i:['Atum','Cebola'], r:'Atum temperado', p:'Asse bem.'},
-    {n:'Pizza Bacon', i:['Bacon'], r:'Bacon crocante', p:'Forno médio.'},
-    {n:'Pizza Vegetariana', i:['Legumes'], r:'Legumes', p:'Asse até dourar.'}
+    {n:'Pizza Mussarela', i:['Massa','Queijo'], r:'Molho e queijo', p:'Abra a massa, coloque o molho e asse.', t:'15 minutos'},
+    {n:'Pizza Calabresa', i:['Calabresa','Cebola'], r:'Molho e calabresa', p:'Monte a pizza e leve ao forno alto.', t:'15 minutos'},
+    {n:'Pizza Frango', i:['Frango','Catupiry'], r:'Frango cremoso', p:'Monte e asse até dourar.', t:'20 minutos'},
+    {n:'Pizza Portuguesa', i:['Presunto','Ovo'], r:'Completa', p:'Monte os ingredientes e asse.', t:'20 minutos'},
+    {n:'Pizza Marguerita', i:['Tomate','Manjericão'], r:'Tradicional', p:'Asse até o queijo derreter.', t:'15 minutos'},
+    {n:'Pizza Quatro Queijos', i:['Queijos variados'], r:'Queijos', p:'Leve ao forno alto.', t:'15 minutos'},
+    {n:'Pizza Pepperoni', i:['Pepperoni'], r:'Molho e pepperoni', p:'Asse até crocante.', t:'15 minutos'},
+    {n:'Pizza Atum', i:['Atum','Cebola'], r:'Atum temperado', p:'Monte e asse.', t:'20 minutos'},
+    {n:'Pizza Bacon', i:['Bacon'], r:'Bacon crocante', p:'Asse até dourar.', t:'15 minutos'},
+    {n:'Pizza Vegetariana', i:['Legumes'], r:'Legumes', p:'Asse até os legumes ficarem macios.', t:'20 minutos'}
   ]
 };
 
@@ -79,12 +79,13 @@ function mostrar(cat){
   dados[cat].forEach((r,i)=>{
     c.innerHTML += `
       <div class="recipe">
-        <img src="https://picsum.photos/seed/${cat}-${i}/500/300">
+        <img src="https://picsum.photos/seed/${cat}-${i+1}/600/400" alt="${r.n}">
         <div class="content">
           <h3>${r.n}</h3>
           <p><strong>Ingredientes:</strong> ${r.i.join(', ')}</p>
           <p><strong>Recheio:</strong> ${r.r}</p>
-          <p><strong>Preparo:</strong> ${r.p}</p>
+          <p><strong>Modo de preparo:</strong> ${r.p}</p>
+          <p><strong>Tempo:</strong> ${r.t}</p>
         </div>
       </div>`;
   });
