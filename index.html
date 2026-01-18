@@ -3,49 +3,58 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Receitas Deliciosas</title>
+  <title>Site de Receitas</title>
   <style>
     body { font-family: Arial, sans-serif; margin:0; background:#f5f5f5; }
     header { background:#8e44ad; color:#fff; padding:20px; text-align:center; }
     nav { background:#732d91; padding:10px; text-align:center; }
-    nav button { margin:5px; padding:10px 15px; border:none; cursor:pointer; border-radius:5px; }
-    main { max-width:1100px; margin:20px auto; padding:10px; }
-    .recipe { background:#fff; margin-bottom:15px; padding:15px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
+    nav button { margin:5px; padding:10px 15px; border:none; cursor:pointer; border-radius:5px; color:#333; }
+    main { max-width:1200px; margin:20px auto; padding:10px; }
+    .recipe { background:#fff; margin-bottom:20px; padding:15px; border-radius:10px; box-shadow:0 2px 5px rgba(0,0,0,0.1); display:flex; gap:15px; }
+    .recipe img { width:200px; height:150px; object-fit:cover; border-radius:8px; }
     h2 { color:#8e44ad; }
   </style>
 </head>
 <body>
   <header>
-    <h1>🍰 Site de Receitas</h1>
-    <p>Pudins, Bolos e Pizzas — tudo organizado por categoria</p>
+    <h1>🍽️ Site de Receitas</h1>
+    <p>Pudins • Bolos • Pizzas</p>
   </header>
 
   <nav>
-    <button onclick="mostrar('pudim')">Pudins</button>
-    <button onclick="mostrar('bolo')">Bolos</button>
-    <button onclick="mostrar('pizza')">Pizzas</button>
+    <button onclick="mostrar('pudim')">🍮 Pudins</button>
+    <button onclick="mostrar('bolo')">🍰 Bolos</button>
+    <button onclick="mostrar('pizza')">🍕 Pizzas</button>
   </nav>
 
   <main id="conteudo"></main>
 
   <script>
-    function gerarReceitas(tipo, total) {
+    function gerarReceitas(tipo, total, imagem) {
       const receitas = [];
       for (let i = 1; i <= total; i++) {
         receitas.push({
-          nome: `${tipo} Receita ${i}`,
-          ingredientes: `Ingredientes base do ${tipo.toLowerCase()} ${i}`,
-          recheio: tipo === 'Pizza' ? `Recheio especial da pizza ${i}` : `Calda/Recheio do ${tipo.toLowerCase()} ${i}`,
-          preparo: `Misture os ingredientes, prepare o recheio e finalize conforme o ${tipo.toLowerCase()} ${i}.`
+          nome: `${tipo} ${i}`,
+          imagem: imagem,
+          ingredientes: [
+            '2 ovos',
+            '1 lata de leite condensado',
+            '1 medida de leite',
+            tipo === 'Pizza' ? 'Massa de pizza pronta' : '1 colher de açúcar'
+          ],
+          recheio: tipo === 'Pizza'
+            ? 'Molho de tomate, queijo mussarela, tomate e orégano'
+            : 'Calda de açúcar caramelizado',
+          preparo: 'Misture todos os ingredientes, prepare o recheio separadamente e asse até ficar pronto.'
         });
       }
       return receitas;
     }
 
     const dados = {
-      pudim: gerarReceitas('Pudim', 100),
-      bolo: gerarReceitas('Bolo', 100),
-      pizza: gerarReceitas('Pizza', 100)
+      pudim: gerarReceitas('Pudim', 100, 'https://images.unsplash.com/photo-1604908177522-3c1a7c5f3a3b'),
+      bolo: gerarReceitas('Bolo', 100, 'https://images.unsplash.com/photo-1542826438-8b7b9f8c6a5a'),
+      pizza: gerarReceitas('Pizza', 100, 'https://images.unsplash.com/photo-1601924638867-3ec62f6d9c1d')
     };
 
     function mostrar(categoria) {
@@ -54,10 +63,14 @@
       dados[categoria].forEach(r => {
         div.innerHTML += `
           <div class="recipe">
-            <h3>${r.nome}</h3>
-            <p><strong>Ingredientes:</strong> ${r.ingredientes}</p>
-            <p><strong>Recheio/Calda:</strong> ${r.recheio}</p>
-            <p><strong>Modo de Preparo:</strong> ${r.preparo}</p>
+            <img src="${r.imagem}" alt="${r.nome}">
+            <div>
+              <h3>${r.nome}</h3>
+              <p><strong>Ingredientes:</strong></p>
+              <ul>${r.ingredientes.map(i => `<li>${i}</li>`).join('')}</ul>
+              <p><strong>Recheio/Calda:</strong> ${r.recheio}</p>
+              <p><strong>Modo de Preparo:</strong> ${r.preparo}</p>
+            </div>
           </div>`;
       });
     }
