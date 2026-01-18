@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Receitas Premium</title>
+  <title>Receitas Organizadas</title>
   <style>
-    body { font-family: 'Segoe UI', Arial, sans-serif; margin:0; background:#fafafa; }
-    header { background:linear-gradient(135deg,#ff6a00,#ee0979); color:#fff; padding:30px; text-align:center; }
-    nav { display:flex; justify-content:center; gap:15px; background:#fff; padding:15px; box-shadow:0 2px 5px rgba(0,0,0,0.1); }
-    nav button { padding:12px 20px; border:none; border-radius:25px; cursor:pointer; font-weight:bold; background:#ff6a00; color:#fff; }
+    body { margin:0; font-family: Arial, Helvetica, sans-serif; background:#f4f4f4; }
+    header { background:linear-gradient(135deg,#ff7a18,#ffb347); color:#fff; padding:30px; text-align:center; }
+    nav { background:#fff; padding:15px; display:flex; justify-content:center; gap:15px; box-shadow:0 2px 5px rgba(0,0,0,.15); }
+    nav button { border:none; padding:12px 20px; border-radius:20px; cursor:pointer; font-weight:bold; background:#ff7a18; color:#fff; }
     main { max-width:1200px; margin:30px auto; padding:15px; display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:20px; }
-    .recipe { background:#fff; border-radius:15px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
-    .recipe img { width:100%; height:220px; object-fit:cover; }
-    .content { padding:15px; }
     h2 { grid-column:1/-1; }
+    .card { background:#fff; border-radius:15px; overflow:hidden; box-shadow:0 4px 10px rgba(0,0,0,.1); }
+    .card img { width:100%; height:220px; object-fit:cover; }
+    .card .txt { padding:15px; }
     ul { padding-left:18px; }
   </style>
 </head>
 <body>
 
 <header>
-  <h1>🍽️ Receitas Premium</h1>
-  <p>Modo de preparo correto • Calda, Cobertura e Recheio separados</p>
+  <h1>🍽️ Site de Receitas</h1>
+  <p>Pudins • Bolos • Pizzas — tudo organizado</p>
 </header>
 
 <nav>
@@ -33,50 +33,62 @@
 <main id="conteudo"></main>
 
 <script>
-const dados = {
+const receitas = {
   pudim: [
-    {
-      n:'Pudim Tradicional',
-      ingredientes:['1 lata (395g) de leite condensado','2 medidas de leite','3 ovos'],
-      calda:['1 xícara de açúcar','1/2 xícara de água'],
-      preparo:'Prepare a calda levando o açúcar ao fogo até derreter. Acrescente a água com cuidado e deixe engrossar. Caramelize a forma. Bata no liquidificador o leite condensado, o leite e os ovos por 1 minuto. Despeje na forma caramelizada, cubra com papel-alumínio e asse em banho-maria a 180°C por cerca de 1 hora. Leve à geladeira por no mínimo 4 horas antes de desenformar.',
-      tempo:'1 hora de forno + 4 horas de geladeira'
-    }
+    { nome:'Pudim Tradicional', img:'https://via.placeholder.com/600x400?text=Pudim+Tradicional', ingredientes:['1 lata de leite condensado','2 medidas de leite','3 ovos'], calda:['1 xícara de açúcar','1/2 xícara de água'], preparo:'Derreta o açúcar até caramelizar. Junte a água com cuidado. Caramelize a forma. Bata os ingredientes no liquidificador, despeje na forma e asse em banho-maria a 180°C por 1 hora. Geladeira por 4 horas.', tempo:'1h forno + 4h geladeira' },
+    { nome:'Pudim de Chocolate', img:'https://via.placeholder.com/600x400?text=Pudim+Chocolate', ingredientes:['1 lata de leite condensado','2 medidas de leite','3 ovos','4 colheres de chocolate'], calda:['1 xícara de açúcar','1/2 xícara de água'], preparo:'Prepare a calda. Bata os ingredientes e asse em banho-maria a 180°C por 1 hora. Geladeira antes de servir.', tempo:'1h forno + 4h geladeira' },
+    { nome:'Pudim de Coco', img:'https://via.placeholder.com/600x400?text=Pudim+Coco', ingredientes:['1 lata de leite condensado','200ml de leite de coco','3 ovos'], calda:['1 xícara de açúcar','1/2 xícara de água'], preparo:'Faça a calda. Bata os ingredientes e asse em banho-maria a 180°C por 1 hora. Geladeira por 4 horas.', tempo:'1h forno + 4h geladeira' },
+    { nome:'Pudim de Leite Ninho', img:'https://via.placeholder.com/600x400?text=Pudim+Leite+Ninho', ingredientes:['1 lata de leite condensado','2 medidas de leite','3 ovos','4 colheres de leite em pó'], calda:['1 xícara de açúcar','1/2 xícara de água'], preparo:'Prepare a calda, bata tudo no liquidificador e asse em banho-maria. Leve à geladeira.', tempo:'1h forno + 4h geladeira' },
+    { nome:'Pudim de Baunilha', img:'https://via.placeholder.com/600x400?text=Pudim+Baunilha', ingredientes:['1 lata de leite condensado','2 medidas de leite','3 ovos','1 colher de baunilha'], calda:['1 xícara de açúcar','1/2 xícara de água'], preparo:'Calda pronta, bata os ingredientes e asse em banho-maria. Geladeira.', tempo:'1h forno + 4h geladeira' },
+    { nome:'Pudim de Limão', img:'https://via.placeholder.com/600x400?text=Pudim+Limao', ingredientes:['1 lata de leite condensado','1 lata de creme de leite','1/2 xícara de suco de limão'], calda:['1 xícara de açúcar','1/2 xícara de água'], preparo:'Prepare a calda. Misture os ingredientes e asse em banho-maria. Geladeira.', tempo:'1h forno + 4h geladeira' },
+    { nome:'Pudim de Maracujá', img:'https://via.placeholder.com/600x400?text=Pudim+Maracuja', ingredientes:['1 lata de leite condensado','1 lata de creme de leite','1/2 xícara de suco de maracujá'], calda:['1 xícara de açúcar','1/2 xícara de água'], preparo:'Calda pronta, bata tudo e asse em banho-maria. Geladeira.', tempo:'1h forno + 4h geladeira' },
+    { nome:'Pudim de Café', img:'https://via.placeholder.com/600x400?text=Pudim+Cafe', ingredientes:['1 lata de leite condensado','2 medidas de leite','3 ovos','1 colher de café solúvel'], calda:['1 xícara de açúcar','1/2 xícara de água'], preparo:'Prepare a calda, bata os ingredientes e asse em banho-maria.', tempo:'1h forno + 4h geladeira' },
+    { nome:'Pudim de Doce de Leite', img:'https://via.placeholder.com/600x400?text=Pudim+Doce+de+Leite', ingredientes:['400g de doce de leite','3 ovos','1 xícara de leite'], calda:['1 xícara de açúcar','1/2 xícara de água'], preparo:'Calda pronta, bata os ingredientes e asse em banho-maria.', tempo:'1h forno + 4h geladeira' },
+    { nome:'Pudim Diet', img:'https://via.placeholder.com/600x400?text=Pudim+Diet', ingredientes:['1 lata de leite condensado diet','2 medidas de leite','3 ovos'], calda:['1 xícara de açúcar diet','1/2 xícara de água'], preparo:'Prepare a calda diet, bata os ingredientes e asse em banho-maria.', tempo:'1h forno + 4h geladeira' }
   ],
+
   bolo: [
-    {
-      n:'Bolo de Chocolate',
-      ingredientes:['3 ovos','1 xícara de açúcar','1/2 xícara de óleo','1 xícara de leite','2 xícaras de farinha','1 xícara de chocolate em pó','1 colher de fermento'],
-      cobertura:['1/2 xícara de leite','3 colheres de chocolate','2 colheres de manteiga','2 colheres de açúcar'],
-      preparo:'Bata os ovos com o açúcar até ficar claro. Acrescente o óleo e o leite. Misture a farinha e o chocolate aos poucos. Por último, incorpore o fermento. Despeje em forma untada e asse em forno preaquecido a 180°C por 40 minutos. Para a cobertura, leve todos os ingredientes ao fogo até ferver e espalhe sobre o bolo ainda quente.',
-      tempo:'40 minutos'
-    }
+    { nome:'Bolo de Chocolate', img:'https://via.placeholder.com/600x400?text=Bolo+Chocolate', ingredientes:['3 ovos','1 xícara de açúcar','1/2 xícara de óleo','1 xícara de leite','2 xícaras de farinha','1 xícara de chocolate','1 colher de fermento'], cobertura:['1/2 xícara de leite','3 colheres de chocolate','2 colheres de manteiga','2 colheres de açúcar'], preparo:'Misture os líquidos, junte os secos e o fermento. Asse a 180°C por 40 minutos. Cubra quente.', tempo:'40 minutos' },
+    { nome:'Bolo de Cenoura', img:'https://via.placeholder.com/600x400?text=Bolo+Cenoura', ingredientes:['3 cenouras','3 ovos','1 xícara de óleo','2 xícaras de açúcar','2 xícaras de farinha','1 colher de fermento'], cobertura:['1 lata de leite condensado','3 colheres de chocolate','1 colher de manteiga'], preparo:'Bata cenoura, ovos e óleo. Misture os secos e asse a 180°C por 40 minutos. Cubra.', tempo:'40 minutos' },
+    { nome:'Bolo de Laranja', img:'https://via.placeholder.com/600x400?text=Bolo+Laranja', ingredientes:['3 ovos','1 xícara de suco de laranja','2 xícaras de açúcar','2 xícaras de farinha','1 colher de fermento'], cobertura:['1/2 xícara de suco','1/2 xícara de açúcar'], preparo:'Misture tudo, fermento por último. Asse a 180°C por 40 minutos e regue com a calda.', tempo:'40 minutos' },
+    { nome:'Bolo de Coco', img:'https://via.placeholder.com/600x400?text=Bolo+Coco', ingredientes:['3 ovos','1 vidro de leite de coco','2 xícaras de açúcar','2 xícaras de farinha','1 colher de fermento'], cobertura:['1 lata de leite condensado','100g de coco ralado'], preparo:'Misture os ingredientes, asse a 180°C por 40 minutos e cubra.', tempo:'40 minutos' },
+    { nome:'Bolo de Baunilha', img:'https://via.placeholder.com/600x400?text=Bolo+Baunilha', ingredientes:['3 ovos','2 xícaras de açúcar','1 xícara de leite','2 xícaras de farinha','1 colher de fermento'], cobertura:['1 lata de leite condensado','1 colher de manteiga'], preparo:'Misture tudo, asse a 180°C por 40 minutos e cubra.', tempo:'40 minutos' },
+    { nome:'Bolo de Milho', img:'https://via.placeholder.com/600x400?text=Bolo+Milho', ingredientes:['1 lata de milho','3 ovos','1 xícara de açúcar','1 xícara de leite','1 xícara de fubá','1 colher de fermento'], cobertura:['1 lata de leite condensado'], preparo:'Bata tudo, fermento por último. Asse a 180°C por 40 minutos.', tempo:'40 minutos' },
+    { nome:'Bolo de Limão', img:'https://via.placeholder.com/600x400?text=Bolo+Limao', ingredientes:['3 ovos','2 xícaras de açúcar','1 xícara de leite','2 xícaras de farinha','1 colher de fermento'], cobertura:['1 lata de leite condensado','suco de limão'], preparo:'Asse a massa e cubra com a mistura de leite condensado e limão.', tempo:'40 minutos' },
+    { nome:'Bolo de Fubá', img:'https://via.placeholder.com/600x400?text=Bolo+Fuba', ingredientes:['3 ovos','2 xícaras de açúcar','1 xícara de leite','1 xícara de fubá','1 xícara de farinha','1 colher de fermento'], cobertura:['açúcar e canela'], preparo:'Misture tudo e asse a 180°C por 40 minutos.', tempo:'40 minutos' },
+    { nome:'Bolo de Banana', img:'https://via.placeholder.com/600x400?text=Bolo+Banana', ingredientes:['4 bananas','3 ovos','2 xícaras de açúcar','2 xícaras de farinha','1 colher de fermento'], cobertura:['açúcar e canela'], preparo:'Misture os ingredientes e asse a 180°C por 40 minutos.', tempo:'40 minutos' },
+    { nome:'Bolo Integral', img:'https://via.placeholder.com/600x400?text=Bolo+Integral', ingredientes:['3 ovos','1 xícara de açúcar mascavo','2 xícaras de farinha integral','1 xícara de leite','1 colher de fermento'], cobertura:['mel'], preparo:'Misture tudo e asse a 180°C por 40 minutos.', tempo:'40 minutos' }
   ],
+
   pizza: [
-    {
-      n:'Pizza Mussarela',
-      ingredientes:['1 massa de pizza','200g de mussarela ralada','1/2 xícara de molho de tomate'],
-      recheio:['Molho de tomate','Mussarela','Orégano a gosto'],
-      preparo:'Abra a massa em uma assadeira untada. Espalhe o molho de tomate, cubra com a mussarela e finalize com orégano. Leve ao forno preaquecido a 230°C até a massa assar e o queijo derreter e dourar levemente.',
-      tempo:'15 a 20 minutos'
-    }
+    { nome:'Pizza Mussarela', img:'https://via.placeholder.com/600x400?text=Pizza+Mussarela', ingredientes:['1 massa','1/2 xícara de molho'], recheio:['200g de mussarela','orégano'], preparo:'Monte e asse a 230°C até dourar.', tempo:'15 a 20 minutos' },
+    { nome:'Pizza Calabresa', img:'https://via.placeholder.com/600x400?text=Pizza+Calabresa', ingredientes:['1 massa','1/2 xícara de molho'], recheio:['calabresa','cebola','mussarela'], preparo:'Monte e asse a 230°C.', tempo:'15 a 20 minutos' },
+    { nome:'Pizza Portuguesa', img:'https://via.placeholder.com/600x400?text=Pizza+Portuguesa', ingredientes:['1 massa','1/2 xícara de molho'], recheio:['presunto','ovo','cebola','azeitona'], preparo:'Monte e asse a 230°C.', tempo:'15 a 20 minutos' },
+    { nome:'Pizza Frango', img:'https://via.placeholder.com/600x400?text=Pizza+Frango', ingredientes:['1 massa','1/2 xícara de molho'], recheio:['frango desfiado','requeijão'], preparo:'Monte e asse a 230°C.', tempo:'15 a 20 minutos' },
+    { nome:'Pizza Quatro Queijos', img:'https://via.placeholder.com/600x400?text=Pizza+4+Queijos', ingredientes:['1 massa','1/2 xícara de molho'], recheio:['mussarela','parmesão','provolone','gorgonzola'], preparo:'Monte e asse a 230°C.', tempo:'15 a 20 minutos' },
+    { nome:'Pizza Bacon', img:'https://via.placeholder.com/600x400?text=Pizza+Bacon', ingredientes:['1 massa','1/2 xícara de molho'], recheio:['bacon','mussarela'], preparo:'Monte e asse a 230°C.', tempo:'15 a 20 minutos' },
+    { nome:'Pizza Milho', img:'https://via.placeholder.com/600x400?text=Pizza+Milho', ingredientes:['1 massa','1/2 xícara de molho'], recheio:['milho','mussarela'], preparo:'Monte e asse a 230°C.', tempo:'15 a 20 minutos' },
+    { nome:'Pizza Atum', img:'https://via.placeholder.com/600x400?text=Pizza+Atum', ingredientes:['1 massa','1/2 xícara de molho'], recheio:['atum','cebola'], preparo:'Monte e asse a 230°C.', tempo:'15 a 20 minutos' },
+    { nome:'Pizza Marguerita', img:'https://via.placeholder.com/600x400?text=Pizza+Marguerita', ingredientes:['1 massa','1/2 xícara de molho'], recheio:['mussarela','tomate','manjericão'], preparo:'Monte e asse a 230°C.', tempo:'15 a 20 minutos' },
+    { nome:'Pizza Veggie', img:'https://via.placeholder.com/600x400?text=Pizza+Veggie', ingredientes:['1 massa','1/2 xícara de molho'], recheio:['legumes','mussarela'], preparo:'Monte e asse a 230°C.', tempo:'15 a 20 minutos' }
   ]
 };
 
 function mostrar(cat){
   const c = document.getElementById('conteudo');
   c.innerHTML = `<h2>${cat.toUpperCase()}</h2>`;
-  dados[cat].forEach((r,i)=>{
+
+  receitas[cat].forEach(r => {
     c.innerHTML += `
-      <div class="recipe">
-        <img src="https://foodish-api.com/images/${cat}/${cat}${i+1}.jpg" onerror="this.src='https://via.placeholder.com/600x400?text=Prato+Pronto'">
-        <div class="content">
-          <h3>${r.n}</h3>
+      <div class="card">
+        <img src="${r.img}" alt="${r.nome}">
+        <div class="txt">
+          <h3>${r.nome}</h3>
           <p><strong>Ingredientes:</strong></p>
-          <ul>${r.ingredientes.map(x=>`<li>${x}</li>`).join('')}</ul>
-          ${r.calda ? `<p><strong>Calda:</strong></p><ul>${r.calda.map(x=>`<li>${x}</li>`).join('')}</ul>` : ''}
-          ${r.cobertura ? `<p><strong>Cobertura:</strong></p><ul>${r.cobertura.map(x=>`<li>${x}</li>`).join('')}</ul>` : ''}
-          ${r.recheio ? `<p><strong>Recheio:</strong></p><ul>${r.recheio.map(x=>`<li>${x}</li>`).join('')}</ul>` : ''}
+          <ul>${r.ingredientes.map(i=>`<li>${i}</li>`).join('')}</ul>
+          ${r.calda ? `<p><strong>Calda:</strong></p><ul>${r.calda.map(i=>`<li>${i}</li>`).join('')}</ul>` : ''}
+          ${r.cobertura ? `<p><strong>Cobertura:</strong></p><ul>${r.cobertura.map(i=>`<li>${i}</li>`).join('')}</ul>` : ''}
+          ${r.recheio ? `<p><strong>Recheio:</strong></p><ul>${r.recheio.map(i=>`<li>${i}</li>`).join('')}</ul>` : ''}
           <p><strong>Modo de preparo:</strong> ${r.preparo}</p>
           <p><strong>Tempo:</strong> ${r.tempo}</p>
         </div>
