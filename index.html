@@ -21,7 +21,7 @@
 
 <header>
   <h1>🍽️ Receitas Premium</h1>
-  <p>Ingredientes completos • calda/recheio com quantidades • prato pronto</p>
+  <p>Modo de preparo correto • Calda, Cobertura e Recheio separados</p>
 </header>
 
 <nav>
@@ -37,55 +37,28 @@ const dados = {
   pudim: [
     {
       n:'Pudim Tradicional',
-      img:'pudim-pronto',
-      ingredientes:['1 lata (395g) de leite condensado','2 medidas (da lata) de leite','3 ovos'],
+      ingredientes:['1 lata (395g) de leite condensado','2 medidas de leite','3 ovos'],
       calda:['1 xícara de açúcar','1/2 xícara de água'],
-      preparo:'Bata todos os ingredientes no liquidificador. Caramelize a forma, despeje a mistura e asse em banho-maria a 180°C.',
-      tempo:'1 hora + 4 horas de geladeira'
-    },
-    {
-      n:'Pudim de Chocolate',
-      img:'pudim-chocolate',
-      ingredientes:['1 lata de leite condensado','1 xícara de leite','3 ovos','4 colheres de chocolate em pó'],
-      calda:['1 xícara de açúcar','1/2 xícara de água','2 colheres de chocolate'],
-      preparo:'Bata tudo, coloque na forma caramelizada e asse em banho-maria.',
-      tempo:'1 hora'
+      preparo:'Prepare a calda levando o açúcar ao fogo até derreter. Acrescente a água com cuidado e deixe engrossar. Caramelize a forma. Bata no liquidificador o leite condensado, o leite e os ovos por 1 minuto. Despeje na forma caramelizada, cubra com papel-alumínio e asse em banho-maria a 180°C por cerca de 1 hora. Leve à geladeira por no mínimo 4 horas antes de desenformar.',
+      tempo:'1 hora de forno + 4 horas de geladeira'
     }
   ],
   bolo: [
     {
       n:'Bolo de Chocolate',
-      img:'bolo-chocolate-pronto',
-      ingredientes:['3 ovos','2 xícaras de farinha','1 xícara de açúcar','1 xícara de chocolate em pó','1/2 xícara de óleo'],
-      calda:['1/2 xícara de leite','3 colheres de chocolate','2 colheres de manteiga'],
-      preparo:'Misture os ingredientes, coloque na forma e asse a 180°C.',
+      ingredientes:['3 ovos','1 xícara de açúcar','1/2 xícara de óleo','1 xícara de leite','2 xícaras de farinha','1 xícara de chocolate em pó','1 colher de fermento'],
+      cobertura:['1/2 xícara de leite','3 colheres de chocolate','2 colheres de manteiga','2 colheres de açúcar'],
+      preparo:'Bata os ovos com o açúcar até ficar claro. Acrescente o óleo e o leite. Misture a farinha e o chocolate aos poucos. Por último, incorpore o fermento. Despeje em forma untada e asse em forno preaquecido a 180°C por 40 minutos. Para a cobertura, leve todos os ingredientes ao fogo até ferver e espalhe sobre o bolo ainda quente.',
       tempo:'40 minutos'
-    },
-    {
-      n:'Bolo de Cenoura',
-      img:'bolo-cenoura-pronto',
-      ingredientes:['3 cenouras médias','3 ovos','2 xícaras de farinha','1 xícara de açúcar'],
-      calda:['1/2 xícara de chocolate','2 colheres de manteiga','1/2 xícara de leite'],
-      preparo:'Bata a cenoura com os líquidos, misture os secos e asse.',
-      tempo:'45 minutos'
     }
   ],
   pizza: [
     {
       n:'Pizza Mussarela',
-      img:'pizza-mussarela-pronta',
-      ingredientes:['1 massa de pizza','200g de mussarela','Molho de tomate'],
-      calda:['Molho: 1 xícara de tomate triturado','1 colher de azeite','Sal a gosto'],
-      preparo:'Abra a massa, espalhe o molho, cubra com queijo e asse em forno alto.',
-      tempo:'15 minutos'
-    },
-    {
-      n:'Pizza Calabresa',
-      img:'pizza-calabresa-pronta',
-      ingredientes:['1 massa de pizza','200g de calabresa','1 cebola','Molho de tomate'],
-      calda:['Molho: 1 xícara de tomate','1 colher de azeite','Orégano'],
-      preparo:'Monte a pizza e asse até dourar.',
-      tempo:'15 minutos'
+      ingredientes:['1 massa de pizza','200g de mussarela ralada','1/2 xícara de molho de tomate'],
+      recheio:['Molho de tomate','Mussarela','Orégano a gosto'],
+      preparo:'Abra a massa em uma assadeira untada. Espalhe o molho de tomate, cubra com a mussarela e finalize com orégano. Leve ao forno preaquecido a 230°C até a massa assar e o queijo derreter e dourar levemente.',
+      tempo:'15 a 20 minutos'
     }
   ]
 };
@@ -96,13 +69,14 @@ function mostrar(cat){
   dados[cat].forEach((r,i)=>{
     c.innerHTML += `
       <div class="recipe">
-        <img src="https://foodish-api.com/images/${cat}/${cat}${i+1}.jpg" alt="${r.n}" onerror="this.src='https://via.placeholder.com/600x400?text=Receita+Pronta'">
+        <img src="https://foodish-api.com/images/${cat}/${cat}${i+1}.jpg" onerror="this.src='https://via.placeholder.com/600x400?text=Prato+Pronto'">
         <div class="content">
           <h3>${r.n}</h3>
           <p><strong>Ingredientes:</strong></p>
           <ul>${r.ingredientes.map(x=>`<li>${x}</li>`).join('')}</ul>
-          <p><strong>Calda / Recheio:</strong></p>
-          <ul>${r.calda.map(x=>`<li>${x}</li>`).join('')}</ul>
+          ${r.calda ? `<p><strong>Calda:</strong></p><ul>${r.calda.map(x=>`<li>${x}</li>`).join('')}</ul>` : ''}
+          ${r.cobertura ? `<p><strong>Cobertura:</strong></p><ul>${r.cobertura.map(x=>`<li>${x}</li>`).join('')}</ul>` : ''}
+          ${r.recheio ? `<p><strong>Recheio:</strong></p><ul>${r.recheio.map(x=>`<li>${x}</li>`).join('')}</ul>` : ''}
           <p><strong>Modo de preparo:</strong> ${r.preparo}</p>
           <p><strong>Tempo:</strong> ${r.tempo}</p>
         </div>
@@ -115,4 +89,3 @@ mostrar('pudim');
 
 </body>
 </html>
-
