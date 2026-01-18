@@ -81,7 +81,7 @@ function mostrar(cat){
   receitas[cat].forEach(r => {
     c.innerHTML += `
       <div class="card">
-        <img src="${r.img}" alt="${r.nome}">
+        <img src="https://picsum.photos/800/500?random=${Math.floor(Math.random()*1000)}" alt="${r.nome}" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"800\" height=\"500\"><rect width=\"100%\" height=\"100%\" fill=\"%23ddd\"/><text x=\"50%\" y=\"50%\" font-size=\"30\" text-anchor=\"middle\" fill=\"%23666\">Imagem indisponível</text></svg>'">
         <div class="txt">
           <h3>${r.nome}</h3>
           <p><strong>Ingredientes:</strong></p>
@@ -101,3 +101,4 @@ mostrar('pudim');
 
 </body>
 </html>
+
