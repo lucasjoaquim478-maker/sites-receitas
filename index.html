@@ -3,103 +3,111 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sabores da Casa | Receitas Práticas</title>
+    <title>Portal Gastronômico | Delícias Rápidas</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f9f9f9; color: #333; margin: 0; padding: 0; }
-        header { background-color: #ff6b6b; color: white; text-align: center; padding: 2rem; }
-        .container { max-width: 1000px; margin: 20px auto; padding: 20px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .card { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: transform 0.3s; }
-        .card:hover { transform: translateY(-5px); }
-        .card img { width: 100%; height: 200px; object-fit: cover; }
-        .card-content { padding: 20px; }
-        h2 { color: #ff6b6b; margin-top: 0; }
-        h3 { border-bottom: 2px solid #eee; padding-bottom: 5px; font-size: 1.1em; }
-        ul, ol { padding-left: 20px; font-size: 0.95rem; line-height: 1.6; }
-        footer { text-align: center; padding: 20px; background: #333; color: white; margin-top: 40px; }
+        /* Estilização Geral */
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; background-color: #f4f4f4; color: #333; }
+        header { background: #d35400; color: white; padding: 40px 20px; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        
+        /* Grade de Receitas */
+        .container { max-width: 1200px; margin: 40px auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; padding: 0 20px; }
+        
+        /* Card de Receita */
+        .card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 15px rgba(0,0,0,0.1); transition: 0.3s; }
+        .card:hover { transform: scale(1.02); }
+        .card img { width: 100%; height: 220px; object-fit: cover; }
+        .content { padding: 20px; }
+        
+        /* Tipografia e Cores */
+        h2 { color: #d35400; font-size: 1.5rem; margin-top: 0; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        h3 { color: #e67e22; font-size: 1.1rem; margin-bottom: 5px; }
+        ul, ol { padding-left: 20px; font-size: 0.9rem; margin-bottom: 15px; }
+        .tag { background: #27ae60; color: white; padding: 5px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold; }
+        
+        footer { text-align: center; padding: 30px; background: #2c3e50; color: white; margin-top: 50px; }
     </style>
 </head>
 <body>
 
 <header>
-    <h1>🍳 Sabores da Casa</h1>
-    <p>Receitas deliciosas, simples e rápidas</p>
+    <h1>🍕 Receitas do Chef</h1>
+    <p>Do bolo pudim à pizza de frigideira, tudo em um só lugar!</p>
 </header>
 
 <div class="container">
 
     <div class="card">
-        <img src="https://images.unsplash.com/photo-1590080874088-eec64895b423?auto=format&fit=crop&w=500" alt="Bolo Pudim">
-        <div class="card-content">
-            <h2>🍮 Bolo Pudim</h2>
+        <img src="https://images.unsplash.com/photo-1590080874088-eec64895b423?q=80&w=600" alt="Bolo Pudim">
+        <div class="content">
+            <span class="tag">SOBREMESA</span>
+            <h2>🍮 Bolo Pudim Clássico</h2>
             <h3>Ingredientes</h3>
             <ul>
-                <li><b>Pudim:</b> 3 ovos, 1 leite condensado, 1 medida de leite.</li>
-                <li><b>Bolo:</b> 3 ovos, 2 xíc. farinha, 1 xíc. chocolate, 1 colher fermento.</li>
+                <li>Massa de bolo de chocolate pronta ou caseira.</li>
+                <li>Pudim: 1 leite condensado, 1 leite, 3 ovos.</li>
             </ul>
             <h3>Preparo</h3>
             <ol>
-                <li>Caramelize a forma.</li>
-                <li>Bata o pudim no liquidificador.</li>
-                <li>Misture a massa do bolo e coloque na forma. Despeje o pudim por cima.</li>
-                <li>Asse em banho-maria por 1h.</li>
+                <li>Coloque a massa do bolo na forma untada com caramelo.</li>
+                <li>Despeje o pudim batido por cima (ele vai pro fundo sozinho).</li>
+                <li>Asse em banho-maria por 50 min a 180°C.</li>
             </ol>
         </div>
     </div>
 
     <div class="card">
-        <img src="https://images.unsplash.com/photo-1546549032-9571cd6b27df?auto=format&fit=crop&w=500" alt="Macarrão">
-        <div class="card-content">
-            <h2>🍝 Macarrão de Panela</h2>
+        <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?q=80&w=600" alt="Pizza de Forno">
+        <div class="content">
+            <span class="tag">FORNO</span>
+            <h2>🍕 Pizza Tradicional</h2>
             <h3>Ingredientes</h3>
             <ul>
-                <li>500g de macarrão penne.</li>
-                <li>1 sachê de molho de tomate.</li>
-                <li>200g de presunto e muçarela.</li>
-                <li>1 creme de leite.</li>
+                <li>500g farinha, 10g fermento biológico, 300ml água.</li>
+                <li>Recheio: Molho, Muçarela, Manjericão.</li>
             </ul>
             <h3>Preparo</h3>
             <ol>
-                <li>Cozinhe o macarrão e escorra.</li>
-                <li>Na mesma panela, misture molho, presunto e creme de leite.</li>
-                <li>Misture o macarrão e cubra com queijo até derreter.</li>
+                <li>Sove a massa e deixe descansar por 1 hora.</li>
+                <li>Abra em discos e pré-asse por 5 minutos.</li>
+                <li>Recheie e asse até dourar as bordas.</li>
             </ol>
         </div>
     </div>
 
     <div class="card">
-        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=500" alt="Pizza">
-        <div class="card-content">
-            <h2>🍕 Pizza Rápida</h2>
+        <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?q=80&w=600" alt="Pizza Frigideira">
+        <div class="content">
+            <span class="tag">RÁPIDA</span>
+            <h2>🍳 Pizza de Frigideira</h2>
             <h3>Ingredientes</h3>
             <ul>
-                <li>1 ovo, 1 xíc. de leite.</li>
-                <li>1 e 1/2 xíc. de farinha.</li>
-                <li>Molho e recheio a gosto.</li>
+                <li>1 xícara de farinha, um pouco de água e sal.</li>
+                <li>Azeite para untar.</li>
             </ul>
             <h3>Preparo</h3>
             <ol>
-                <li>Bata a massa no liquidificador.</li>
-                <li>Asse a massa sozinha por 10 min.</li>
-                <li>Recheie e leve ao forno novamente para gratinar.</li>
+                <li>Misture a massa até desgrudar das mãos.</li>
+                <li>Abra bem fino e coloque na frigideira untada.</li>
+                <li>Vire a massa, recheie rapidamente e tampe para o queijo derreter.</li>
             </ol>
         </div>
     </div>
 
     <div class="card">
-        <img src="https://images.unsplash.com/photo-1572656631137-7935297eff55?auto=format&fit=crop&w=500" alt="Bruschetta">
-        <div class="card-content">
-            <h2>🥗 Bruschettas</h2>
+        <img src="https://images.unsplash.com/photo-1572656631137-7935297eff55?q=80&w=600" alt="Entrada">
+        <div class="content">
+            <span class="tag">ENTRADA</span>
+            <h2>🥖 Bruschetta Italiana</h2>
             <h3>Ingredientes</h3>
             <ul>
-                <li>Pão baguete fatiado.</li>
-                <li>Tomates picados e alho.</li>
-                <li>Azeite, sal e manjericão.</li>
+                <li>Pão amanhecido, tomates, alho e manjericão.</li>
+                <li>Azeite de oliva extra virgem.</li>
             </ul>
             <h3>Preparo</h3>
             <ol>
-                <li>Torre levemente os pães.</li>
-                <li>Esfregue o alho no pão.</li>
-                <li>Cubra com os tomates temperados no azeite.</li>
+                <li>Torre fatias de pão com azeite.</li>
+                <li>Esfregue o alho no pão quente.</li>
+                <li>Coloque tomates temperados por cima e sirva.</li>
             </ol>
         </div>
     </div>
@@ -107,7 +115,7 @@
 </div>
 
 <footer>
-    <p>© 2024 Sabores da Casa - Criado para Chefs Iniciantes</p>
+    <p>© 2026 - Site de Receitas Criado por IA</p>
 </footer>
 
 </body>
