@@ -1,137 +1,312 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8">
-  <title>Site de Receitas</title>
+  <meta charset="UTF-8" />
+  <title>Receitas — 10.000+</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
+    :root {
+      --bg: #fffaf3;
+      --card: #ffffff;
+      --text: #2f2a26;
+      --accent: #c85a2e;
+      --accent-dark: #8b3f20;
+      --muted: #6b5f57;
+      --border: #e7d9c9;
+    }
+    * { box-sizing: border-box; }
     body {
-      font-family: Arial, sans-serif;
-      margin: 0; padding: 0;
-      background: #fff8f0; color: #333;
+      margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: var(--bg); color: var(--text);
     }
     header {
-      background: #8b4513; color: #fff;
-      padding: 20px; text-align: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+      color: #fff; padding: 28px 16px;
     }
-    nav {
-      background: #d2691e; padding: 10px;
+    header h1 { margin: 0 0 8px; font-size: 28px; }
+    header p { margin: 0; opacity: 0.9; }
+    .bar {
+      display: grid; gap: 10px; grid-template-columns: 1fr 1fr 1fr auto;
+      padding: 12px 16px; background: #fff; border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 10;
     }
-    nav a {
-      color: #fff; margin: 0 10px;
-      text-decoration: none; font-weight: bold;
+    .bar input, .bar select, .bar button {
+      padding: 10px; border: 1px solid var(--border); border-radius: 8px; font-size: 14px;
+      background: var(--card); color: var(--text);
     }
-    section {
-      padding: 20px;
+    .bar button {
+      background: var(--accent); color: #fff; border: none; cursor: pointer;
+    }
+    .bar button:hover { background: var(--accent-dark); }
+    main { padding: 16px; }
+    .stats { font-size: 14px; color: var(--muted); margin-bottom: 12px; }
+    .grid {
+      display: grid; gap: 12px;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
     }
     article {
-      background: #fff; border: 1px solid #ccc;
-      margin: 10px 0; padding: 15px;
-      border-radius: 5px;
+      background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+      padding: 14px; box-shadow: 0 2px 6px rgba(0,0,0,0.04);
     }
-    h2 { color: #8b4513; }
-    h3 { margin-top: 0; }
-    .categoria { margin-bottom: 40px; }
+    article h3 { margin: 0 0 8px; font-size: 18px; }
+    .meta { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+    h4 { margin: 10px 0 6px; font-size: 14px; color: var(--accent-dark); }
+    ul { margin: 0 0 8px 18px; }
+    .pagination {
+      display: flex; gap: 8px; justify-content: center; align-items: center; margin: 18px 0;
+    }
+    .pagination button {
+      padding: 8px 12px; border: 1px solid var(--border); background: #fff; border-radius: 8px; cursor: pointer;
+    }
+    .pagination button.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+    footer {
+      text-align: center; padding: 18px; color: var(--muted);
+    }
+    .badge {
+      display: inline-block; padding: 2px 8px; border-radius: 999px; font-size: 12px;
+      background: #ffe9df; color: var(--accent-dark); border: 1px solid #ffd2c0;
+    }
+    .empty { text-align: center; color: var(--muted); padding: 24px; }
   </style>
 </head>
 <body>
   <header>
-    <h1>🍰 Site de Receitas</h1>
-    <p>Mais de 100 receitas deliciosas: bolos, chocolate quente, pudins e muito mais!</p>
+    <h1>🍽️ Mega Catálogo de Receitas</h1>
+    <p>10.000+ receitas geradas automaticamente—almoço, lanche, jantar, sobremesa e extras.</p>
   </header>
-  <nav>
-    <a href="#bolos">Bolos</a>
-    <a href="#chocolate">Chocolate Quente</a>
-    <a href="#pudins">Pudins</a>
-    <a href="#doces">Doces Diversos</a>
-  </nav>
 
-  <section id="bolos" class="categoria">
-    <h2>Bolos</h2>
-    <!-- Exemplo de receita -->
-    <article>
-      <h3>Bolo de Chocolate</h3>
-      <h4>Ingredientes:</h4>
-      <ul>
-        <li>2 xícaras de farinha</li>
-        <li>1 xícara de açúcar</li>
-        <li>1 xícara de chocolate em pó</li>
-        <li>3 ovos</li>
-        <li>1 colher de fermento</li>
-      </ul>
-      <h4>Modo de Preparo:</h4>
-      <p>Misture tudo, coloque em forma untada e asse por 40 minutos a 180°C.</p>
-    </article>
-    <!-- Repita artigos para completar +30 receitas de bolos -->
-  </section>
+  <div class="bar">
+    <input id="q" type="search" placeholder="Buscar por título ou ingrediente..." />
+    <select id="cat">
+      <option value="todas">Todas as categorias</option>
+      <option value="Almoço">Almoço</option>
+      <option value="Lanche">Lanche</option>
+      <option value="Jantar">Jantar</option>
+      <option value="Sobremesa">Sobremesa</option>
+      <option value="Extras">Extras</option>
+    </select>
+    <select id="pageSize">
+      <option value="24">24 por página</option>
+      <option value="48">48 por página</option>
+      <option value="96">96 por página</option>
+      <option value="192">192 por página</option>
+    </select>
+    <button id="favToggle">⭐ Favoritos</button>
+  </div>
 
-  <section id="chocolate" class="categoria">
-    <h2>Chocolate Quente</h2>
-    <article>
-      <h3>Chocolate Quente Cremoso</h3>
-      <h4>Ingredientes:</h4>
-      <ul>
-        <li>500ml de leite</li>
-        <li>4 colheres de chocolate em pó</li>
-        <li>2 colheres de açúcar</li>
-        <li>1 colher de amido de milho</li>
-      </ul>
-      <h4>Modo de Preparo:</h4>
-      <p>Aqueça o leite, adicione os demais ingredientes e mexa até engrossar.</p>
-    </article>
-    <!-- Adicione +20 receitas de chocolate quente -->
-  </section>
+  <main>
+    <div class="stats" id="stats">Carregando receitas…</div>
+    <div class="grid" id="grid"></div>
+    <div class="empty" id="empty" style="display:none;">Nenhuma receita encontrada.</div>
 
-  <section id="pudins" class="categoria">
-    <h2>Pudins</h2>
-    <article>
-      <h3>Pudim de Leite Condensado</h3>
-      <h4>Ingredientes:</h4>
-      <ul>
-        <li>1 lata de leite condensado</li>
-        <li>2 medidas de leite</li>
-        <li>3 ovos</li>
-        <li>Calda de açúcar caramelizado</li>
-      </ul>
-      <h4>Modo de Preparo:</h4>
-      <p>Bata tudo no liquidificador, despeje na forma caramelizada e asse em banho-maria.</p>
-    </article>
-    <!-- Adicione +20 receitas de pudins -->
-  </section>
+    <div class="pagination" id="pager"></div>
+  </main>
 
-  <section id="doces" class="categoria">
-    <h2>Doces Diversos</h2>
-    <article>
-      <h3>Brigadeiro</h3>
-      <h4>Ingredientes:</h4>
-      <ul>
-        <li>1 lata de leite condensado</li>
-        <li>2 colheres de chocolate em pó</li>
-        <li>1 colher de manteiga</li>
-      </ul>
-      <h4>Modo de Preparo:</h4>
-      <p>Cozinhe em fogo baixo até desgrudar da panela. Enrole e passe no granulado.</p>
-    </article>
-    <!-- Adicione +30 receitas de doces variados -->
-  </section>
+  <footer>
+    <p>&copy; 2026 — Catálogo gerado no navegador. Dica: use a busca para filtrar rápido.</p>
+  </footer>
 
   <script>
-    // Exemplo: filtro simples por título
-    function buscarReceita() {
-      let termo = prompt("Digite o nome da receita:");
-      if (!termo) return;
-      let artigos = document.querySelectorAll("article");
-      artigos.forEach(a => {
-        if (a.querySelector("h3").innerText.toLowerCase().includes(termo.toLowerCase())) {
-          a.style.background = "#ffffcc";
-        } else {
-          a.style.background = "#fff";
-        }
+    // ---------- Configuração de geração ----------
+    const TOTAL = 10000;
+    const CATEGORIES = ["Almoço", "Lanche", "Jantar", "Sobremesa", "Extras"];
+    const BASE_ING = [
+      "arroz", "feijão", "frango", "carne", "peixe", "ovo", "batata", "cenoura", "tomate", "cebola",
+      "alho", "pimentão", "queijo", "leite", "farinha", "açúcar", "manteiga", "óleo", "sal", "pimenta",
+      "orégano", "salsa", "coentro", "creme de leite", "chocolate", "cacau", "banana", "maçã", "coco",
+      "milho", "ervilha", "brócolis", "espinafre", "macarrão", "polpa de tomate", "molho shoyu", "limão"
+    ];
+    const METHODS = [
+      "Refogue os ingredientes principais com temperos.",
+      "Misture tudo e leve ao forno pré-aquecido a 180°C por 35–45 minutos.",
+      "Cozinhe em fogo médio até reduzir e apurar o sabor.",
+      "Grelhe em frigideira quente por 3–5 minutos de cada lado.",
+      "Bata no liquidificador até ficar homogêneo e leve à geladeira por 2 horas.",
+      "Asse em assadeira untada até dourar levemente.",
+      "Prepare em banho-maria por 40 minutos para textura cremosa.",
+      "Finalize com ervas frescas e ajuste o sal antes de servir."
+    ];
+    const ADJECTIVES = ["caseiro", "rápido", "cremoso", "saboroso", "leve", "rústico", "especial", "do dia"];
+    const STYLES = ["com ervas", "ao molho", "na manteiga", "com legumes", "gratinado", "assado", "na panela", "no forno"];
+
+    // ---------- Estado ----------
+    let recipes = [];
+    let filtered = [];
+    let page = 1;
+    let pageSize = parseInt(localStorage.getItem("pageSize") || "24", 10);
+    let showFavs = false;
+
+    // ---------- Utilidades ----------
+    const rand = (n) => Math.floor(Math.random() * n);
+    const pick = (arr) => arr[rand(arr.length)];
+    const sample = (arr, k) => {
+      const a = [...arr], out = [];
+      for (let i = 0; i < k && a.length; i++) {
+        out.push(a.splice(rand(a.length), 1)[0]);
+      }
+      return out;
+    };
+    const slug = (s) => s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-");
+
+    // ---------- Geração de receitas ----------
+    function generateRecipes(total) {
+      const out = [];
+      for (let i = 1; i <= total; i++) {
+        const cat = CATEGORIES[i % CATEGORIES.length];
+        const base = pick(BASE_ING);
+        const adj = pick(ADJECTIVES);
+        const style = pick(STYLES);
+        const title = `${cat} ${adj}: ${base} ${style} #${i}`;
+        const ings = sample(BASE_ING, 6 + rand(3)); // 6–8 ingredientes
+        const method = `${pick(METHODS)} ${pick(METHODS)}`;
+        out.push({
+          id: i,
+          title,
+          category: cat,
+          ingredients: ings,
+          method,
+          slug: slug(title)
+        });
+      }
+      return out;
+    }
+
+    // ---------- Renderização ----------
+    const grid = document.getElementById("grid");
+    const stats = document.getElementById("stats");
+    const pager = document.getElementById("pager");
+    const empty = document.getElementById("empty");
+
+    function renderStats() {
+      const total = showFavs ? favorites().length : recipes.length;
+      const vis = filtered.length;
+      stats.textContent = `Total: ${total} • Filtradas: ${vis} • Página ${page} • Exibindo ${pageSize}/página`;
+    }
+
+    function favorites() {
+      const raw = JSON.parse(localStorage.getItem("favs") || "[]");
+      return raw;
+    }
+
+    function isFav(id) {
+      return favorites().includes(id);
+    }
+
+    function toggleFav(id) {
+      const favs = new Set(favorites());
+      if (favs.has(id)) favs.delete(id); else favs.add(id);
+      localStorage.setItem("favs", JSON.stringify([...favs]));
+      renderPage(); // atualiza estrela
+    }
+
+    function applyFilters() {
+      const q = document.getElementById("q").value.trim().toLowerCase();
+      const cat = document.getElementById("cat").value;
+      const baseList = showFavs ? recipes.filter(r => isFav(r.id)) : recipes;
+
+      filtered = baseList.filter(r => {
+        const catOk = (cat === "todas") || (r.category === cat);
+        if (!q) return catOk;
+        const text = `${r.title} ${r.ingredients.join(" ")}`.toLowerCase();
+        return catOk && text.includes(q);
+      });
+
+      page = 1; // reset ao filtrar
+      renderPage();
+    }
+
+    function renderPage() {
+      renderStats();
+      const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+      page = Math.min(page, totalPages);
+
+      const start = (page - 1) * pageSize;
+      const slice = filtered.slice(start, start + pageSize);
+
+      grid.innerHTML = "";
+      if (slice.length === 0) {
+        empty.style.display = "block";
+      } else {
+        empty.style.display = "none";
+        const frag = document.createDocumentFragment();
+        slice.forEach(r => {
+          const el = document.createElement("article");
+          el.innerHTML = `
+            <h3>${r.title}</h3>
+            <div class="meta">
+              <span class="badge">${r.category}</span>
+              &nbsp;•&nbsp; ID: ${r.id}
+              &nbsp;•&nbsp; <button data-fav="${r.id}" style="border:none;background:none;cursor:pointer;">${isFav(r.id) ? "⭐" : "☆"} Favoritar</button>
+            </div>
+            <h4>Ingredientes:</h4>
+            <ul>${r.ingredients.map(i => `<li>${i}</li>`).join("")}</ul>
+            <h4>Modo de preparo:</h4>
+            <p>${r.method}</p>
+          `;
+          frag.appendChild(el);
+        });
+        grid.appendChild(frag);
+      }
+
+      // Paginação
+      pager.innerHTML = "";
+      const pfrag = document.createDocumentFragment();
+      const mkBtn = (label, p, active=false, disabled=false) => {
+        const b = document.createElement("button");
+        b.textContent = label;
+        if (active) b.classList.add("active");
+        if (disabled) b.disabled = true;
+        b.addEventListener("click", () => { page = p; renderPage(); });
+        return b;
+      };
+      pfrag.appendChild(mkBtn("«", 1, false, page === 1));
+      pfrag.appendChild(mkBtn("‹", Math.max(1, page - 1), false, page === 1));
+
+      // páginas compactas
+      const windowSize = 5;
+      const startP = Math.max(1, page - Math.floor(windowSize/2));
+      const endP = Math.min(totalPages, startP + windowSize - 1);
+      for (let p = startP; p <= endP; p++) {
+        pfrag.appendChild(mkBtn(String(p), p, p === page));
+      }
+
+      pfrag.appendChild(mkBtn("›", Math.min(totalPages, page + 1), false, page === totalPages));
+      pfrag.appendChild(mkBtn("»", totalPages, false, page === totalPages));
+      pager.appendChild(pfrag);
+
+      // Favoritar (delegação)
+      grid.querySelectorAll("button[data-fav]").forEach(btn => {
+        btn.addEventListener("click", (e) => {
+          const id = parseInt(e.currentTarget.getAttribute("data-fav"), 10);
+          toggleFav(id);
+        });
       });
     }
+
+    // ---------- Eventos ----------
+    document.getElementById("q").addEventListener("input", () => {
+      // debounce simples
+      clearTimeout(window.__qTimer);
+      window.__qTimer = setTimeout(applyFilters, 200);
+    });
+    document.getElementById("cat").addEventListener("change", applyFilters);
+    document.getElementById("pageSize").addEventListener("change", (e) => {
+      pageSize = parseInt(e.target.value, 10);
+      localStorage.setItem("pageSize", String(pageSize));
+      renderPage();
+    });
+    document.getElementById("favToggle").addEventListener("click", () => {
+      showFavs = !showFavs;
+      document.getElementById("favToggle").textContent = showFavs ? "⭐ Mostrando favoritos" : "⭐ Favoritos";
+      applyFilters();
+    });
+
+    // ---------- Inicialização ----------
+    (function init() {
+      recipes = generateRecipes(TOTAL);
+      filtered = recipes.slice();
+      renderPage();
+    })();
   </script>
-  <footer style="background:#d2691e;color:#fff;text-align:center;padding:10px;">
-    <button onclick="buscarReceita()">🔍 Buscar Receita</button>
-    <p>&copy; 2026 - Site de Receitas</p>
-  </footer>
 </body>
 </html>
